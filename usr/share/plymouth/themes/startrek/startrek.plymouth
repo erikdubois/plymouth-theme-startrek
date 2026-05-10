@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=startrek
+Description=Star Trek Starfleet boot theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/startrek
+ScriptFile=/usr/share/plymouth/themes/startrek/startrek.script
