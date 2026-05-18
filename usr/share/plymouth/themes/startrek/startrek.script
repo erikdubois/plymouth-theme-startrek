@@ -13,21 +13,30 @@ bullet.image = Image.Text("*", 1, 1, 1);
 state.status = "play";
 state.time = 0.0;
 
-for (i = 0; i < 24; i++)
-  logo_image[i] = Image("progress-" + i + ".png");
-logo_sprite = Sprite();
+logo_image = Image("progress-0.png");
+logo_sprite = Sprite(logo_image);
 
-logo.x = Window.GetX() + (Window.GetWidth(0) / 2 - logo_image[0].GetWidth() / 2);
-logo.y = Window.GetY() + (Window.GetHeight(0) / 2 - logo_image[0].GetHeight() / 2);
+logo.x = Window.GetX() + (Window.GetWidth(0) / 2 - logo_image.GetWidth() / 2);
+logo.y = Window.GetY() + (Window.GetHeight(0) / 2 - logo_image.GetHeight() / 2);
 
 logo_sprite.SetX(logo.x);
 logo_sprite.SetY(logo.y);
 
-progress = 0;
+# Glow layer: same image scaled 1.25x, rendered behind the logo
+glow_scale = 1.25;
+glow_w = Math.Int(logo_image.GetWidth() * glow_scale);
+glow_h = Math.Int(logo_image.GetHeight() * glow_scale);
+glow_image = logo_image.Scale(glow_w, glow_h);
+glow_sprite = Sprite(glow_image);
+glow_sprite.SetX(logo.x - Math.Int((glow_w - logo_image.GetWidth()) / 2));
+glow_sprite.SetY(logo.y - Math.Int((glow_h - logo_image.GetHeight()) / 2));
+glow_sprite.SetZ(-1);
 
 fun refresh_callback() {
-    logo_sprite.SetImage(logo_image[Math.Int(progress / 3) % 24]);
-    progress++;
+    breath = (Math.Sin(state.time * 0.05) + 1) / 2;
+    logo_sprite.SetOpacity(0.8 + breath * 0.2);
+    glow_sprite.SetOpacity(breath * 0.45);
+    state.time += 1.0;
 }
 
 Plymouth.SetRefreshFunction(refresh_callback);
