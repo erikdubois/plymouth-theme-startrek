@@ -8,10 +8,16 @@ A Plymouth boot splash theme for Arch/Kiro Linux, styled after Star Trek aesthet
 - `setup.sh` — git remote/identity configuration
 - `up.sh` — pull → clean → commit → push workflow
 
+## Animation pattern
+The breathing glow uses two layered sprites:
+- `logo_sprite`: `progress-0.png` at screen center, opacity 0.8→1.0
+- `glow_sprite`: same image scaled 1.25×, `SetZ(-1)` (behind), opacity 0.0→0.45
+- Sin wave: `breath = (Math.Sin(state.time * 0.05) + 1) / 2` — ~2.5s cycle at 50 Hz
+
 ## Current state (2026-05-18)
-No active work in progress. Repo is clean on `main`.
+Static breathing-glow logo implemented and pushed. Repo clean on `main`.
 
 ## Next steps
-- Confirm theme renders correctly on Kiro ISO boot
+- Test theme on Kiro ISO boot (use `plymouthd --no-daemon --debug` + `plymouth --show-splash` to test without reboot)
 - Consider packaging as AUR or `nemesis_repo` PKGBUILD
 - Update README.md with install instructions
