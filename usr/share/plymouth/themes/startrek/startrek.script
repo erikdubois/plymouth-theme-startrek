@@ -22,14 +22,16 @@ logo.y = Window.GetY() + (Window.GetHeight(0) / 2 - logo_image.GetHeight() / 2);
 logo_sprite.SetX(logo.x);
 logo_sprite.SetY(logo.y);
 
-# Glow layer: same image scaled 1.25x, rendered behind the logo
-glow_scale = 1.25;
-glow_w = Math.Int(logo_image.GetWidth() * glow_scale);
-glow_h = Math.Int(logo_image.GetHeight() * glow_scale);
-glow_image = logo_image.Scale(glow_w, glow_h);
+# Glow layer: pre-blurred halo PNG with alpha, rendered behind the logo.
+# glow.png is a 660x660 bake derived from progress-0.png via flood-fill of the
+# delta interior + transparent-bg conversion + Gaussian blur σ=14. Pre-baking
+# is required because progress-0.png is opaque-grayscale thin outlines —
+# runtime Scale() of that cannot produce a halo. See CHANGELOG 2026.05.21 for
+# the exact ImageMagick recipe.
+glow_image = Image("glow.png");
 glow_sprite = Sprite(glow_image);
-glow_sprite.SetX(logo.x - Math.Int((glow_w - logo_image.GetWidth()) / 2));
-glow_sprite.SetY(logo.y - Math.Int((glow_h - logo_image.GetHeight()) / 2));
+glow_sprite.SetX(logo.x - Math.Int((glow_image.GetWidth() - logo_image.GetWidth()) / 2));
+glow_sprite.SetY(logo.y - Math.Int((glow_image.GetHeight() - logo_image.GetHeight()) / 2));
 glow_sprite.SetZ(-1);
 
 fun refresh_callback() {
