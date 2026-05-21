@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026.05.21
+
+### What Changed
+- README.md fleshed out from a single placeholder line to a full install/usage guide. Documents requirements, install steps, live-preview-without-reboot procedure, uninstall, and packaging pointer.
+- TODO.md updated: "Verify theme renders during Kiro ISO boot" closed (confirmed working); "Write install instructions in README.md" closed (this commit); "Test with `plymouth --show-splash` in a VM" dropped from backlog (covered by the README's live-preview section).
+
+### Technical Details
+- README structured around the canonical Arch/Kiro Plymouth install: copy theme → add `plymouth` hook to `mkinitcpio.conf` → `plymouth-set-default-theme -R startrek` → `quiet splash` in `GRUB_CMDLINE_LINUX_DEFAULT`. Includes a TTY-based preview using `plymouthd --debug` + `plymouth --show-splash` so the theme can be tested without rebooting.
+- Mirrors the structure used by other EDU theme repos so a user landing on either repo gets the same install pattern.
+
+### Files Modified
+- README.md
+- TODO.md
+- CHANGELOG.md
+
 ## 2026.05.18
 
 ### What Changed
