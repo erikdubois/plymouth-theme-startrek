@@ -8,4 +8,3 @@
 - [x] **Verify theme renders correctly during Kiro ISO boot sequence** — _confirmed by Erik (closed 2026-05-21)._
 
 ## Backlog
-- [ ] Add alternative color variants
