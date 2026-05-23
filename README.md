@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="kiro.jpg" alt="Kiro" width="220" />
+</p>
+
 # plymouth-theme-startrek
 
 A Plymouth boot splash theme for Arch / Kiro Linux with a Star Trek Starfleet look. A static central logo with a soft breathing glow (~2.5 s sin-wave cycle at 50 Hz), built from 24 progress frames.
